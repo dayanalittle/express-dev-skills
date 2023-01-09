@@ -1,12 +1,25 @@
-import { skills } from '../data/skills-data.js'
+// Import the model that we exported in the Todo.js model file
+import { Skill } from '../models/skills.js'
 
-// index- returns all skills
+// Inside the index controller, use the Todo model to query for ALL todos
 function index(req, res) {
-    res.render('skills/index', {
-        skills: skills
-    })
+    Skill.find({})
+        .then(skills => { 
+            res.render('skills/index', {
+                skills: skills,
+            })
+        })
+        .catch(error => { // If there's an error, console.log it and redirect back home!
+            console.log(error)
+            res.redirect('/')
+        })
+}
+
+function newSkill(req, res) {
+    res.render('skills/new')
 }
 
 export {
-    index
+    index,
+    newSkill as new,
 }
