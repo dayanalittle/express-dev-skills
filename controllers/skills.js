@@ -3,23 +3,29 @@ import { Skill } from '../models/skills.js'
 
 // Inside the index controller, use the Todo model to query for ALL todos
 function index(req, res) {
-    Skill.find({})
-        .then(skills => { 
-            res.render('skills/index', {
-                skills: skills,
-            })
-        })
-        .catch(error => { // If there's an error, console.log it and redirect back home!
-            console.log(error)
-            res.redirect('/')
-        })
+  console.log("this func is working");
+  Skill.find({})
+    .then(skills => {
+      res.render('skills/index', {
+        skills: skills,
+      })
+    })
+    .catch(error => { // If there's an error, console.log it and redirect back home!
+      console.log(error)
+      res.redirect('/')
+    })
 }
 
 function newSkill(req, res) {
-    res.render('skills/new')
+  res.render('skills/new')
+}
+
+function create(req, res) {
+  
 }
 
 export {
-    index,
-    newSkill as new,
+  index,
+  newSkill as new,
+  create
 }
