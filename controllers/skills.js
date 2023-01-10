@@ -21,7 +21,17 @@ function newSkill(req, res) {
 }
 
 function create(req, res) {
-  
+  console.log(req.body)
+  req.body.done = false
+  Skill.create(req.body)
+  .then(todo => {
+		// Notice we are doing a redirect here!
+    res.redirect('/skills')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/skills')
+  })
 }
 
 export {
