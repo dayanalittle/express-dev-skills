@@ -3,11 +3,11 @@ import { Skill } from '../models/skills.js'
 
 // Inside the index controller, use the Todo model to query for ALL todos
 function index(req, res) {
-  console.log("this func is working");
   Skill.find({})
     .then(skills => {
       res.render('skills/index', {
         skills: skills,
+        time: req.time
       })
     })
     .catch(error => { // If there's an error, console.log it and redirect back home!
@@ -47,9 +47,21 @@ function show(req, res) {
   })
 }
 
+function deleteSkill(req, res) {
+  Skill.findByIdAndDelete(req.params.id)
+  .then(todo => {
+    res.redirect('/skills')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/skills')
+  })
+}
+
 export {
   index,
   newSkill as new,
   create,
   show,
+  deleteSkill as delete,
 }
